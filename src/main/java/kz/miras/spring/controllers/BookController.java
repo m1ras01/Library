@@ -5,17 +5,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import kz.miras.spring.dao.bookDAO;
+import kz.miras.spring.dao.BookDAO;
 import kz.miras.spring.dao.authorDAO;
 
 @Controller
 @RequestMapping("/books")
 public class BookController {
-    private final bookDAO bookDAO;
+    private final BookDAO bookDAO;
     private final authorDAO authorDAO;
 
     @Autowired
-    public BookController(bookDAO bookDAO,authorDAO authorDAO) {
+    public BookController(BookDAO bookDAO,authorDAO authorDAO) {
         this.authorDAO = authorDAO;
         this.bookDAO = bookDAO;
     }
@@ -34,12 +34,12 @@ public class BookController {
 
     @GetMapping("/new")
     public String newBook(Model model){
-        model.addAttribute("books",new Book());
+        model.addAttribute("book",new Book());
         return "books/new";
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("books") Book book){
+    public String create(@ModelAttribute("book") Book book){
         bookDAO.save(book);
         return "redirect:/books";
     }

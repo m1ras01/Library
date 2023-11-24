@@ -1,45 +1,65 @@
 package kz.miras.spring.models;
-
-import jakarta.validation.constraints.Email;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
+/**
+ * @author Neil Alishev
+ */
 public class Book {
     private int id;
-    @NotEmpty(message = "Name should not be empty")
-    @Size(min=3,max=20,message ="Name should be between 3 and 20 characters")
-    private String Book;
 
-    @Min(value = 0,message = "Age should be greater than 0")
-    private int year;
-    @NotEmpty(message = "Email should be not empty")
-//    @Email(message = "Email should be valid")
+    @NotEmpty(message = "Название книги не должно быть пустым")
+    @Size(min = 2, max = 100, message = "Название книги должно быть от 2 до 100 символов длиной")
+    private String title;
+
+    @NotEmpty(message = "Автор не должен быть пустым")
+    @Size(min = 2, max = 100, message = "Имя автора должно быть от 2 до 100 символов длиной")
     private String author;
 
-    public Book(){}
-    public Book(int id , String Book,int year,String author){
-        this.id = id;
-        this.Book = Book;
-        this.year = year;
-        this.author = author;
-    }
-    public void setBook(String Book) {
-        this.Book = Book;
+    @Min(value = 1500, message = "Год должен быть больше, чем 1500")
+    private int year;
+
+    public Book() {
+
     }
 
-    public String getBook() {
-        return Book;
+    public Book(String title, String author, int year) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
     }
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
-    public int getYear(){return year;}
-    public void setYear(int year){this.year = year;}
-    public String getAuthor() {return author;}
-    public void setAuthor(String author) {this.author = author;    }
-}
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+}
