@@ -26,19 +26,19 @@ public class bookDAO {
     }
 
     public Book show(int id){
-        return jdbcTemplatel.query("SELECT * FROM book WHERE book_id = ?",new Object[]{id},new BeanPropertyRowMapper<>(Book.class))
+        return jdbcTemplatel.query("SELECT * FROM book WHERE id = ?",new Object[]{id},new BeanPropertyRowMapper<>(Book.class))
         .stream().findAny().orElse(null);
     }
 
     public void save(Book book){
-        jdbcTemplatel.update("INSERT INTO book(book_name,written) VALUES (?,?)",book.getBook(),book.getYear());
+        jdbcTemplatel.update("INSERT INTO book(title,author,year) VALUES (?,?,?)",book.getBook(),book.getAuthor(),book.getYear());
     }
 
     public void update(int id,Book UpdateBook){
-        jdbcTemplatel.update("UPDATE book SET book_name=?,written=? WHERE book_id=?",UpdateBook.getBook(),UpdateBook.getYear());
+        jdbcTemplatel.update("UPDATE book SET title=?,author=?,year=? WHERE id=?",UpdateBook.getBook(),UpdateBook.getAuthor(),UpdateBook.getYear());
     }
 
     public void delete(int id){
-        jdbcTemplatel.update("DELETE FROM book WHERE book_id =?",id);
+        jdbcTemplatel.update("DELETE FROM book WHERE id =?",id);
     }
 }
